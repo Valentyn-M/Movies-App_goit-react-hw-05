@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_READ_ACCESS_TOKEN_TMDB = import.meta.env.VITE_API_READ_ACCESS_TOKEN_TMDB;
+// const API_READ_ACCESS_TOKEN_TMDB = import.meta.env.VITE_API_READ_ACCESS_TOKEN_TMDB;
+const API_READ_ACCESS_TOKEN_TMDB = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMDFlMzMyOGQyZDFhOGI0NTQ4NmY3ZDhjMzY0OWY5NiIsIm5iZiI6MTczMjE5OTAyOS43Mzc0ODkyLCJzdWIiOiI2NzNmM2Y2YTYyNWJjMzM4ZGMzOGIxMTQiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.18BgbyU7Y4nlHMjaFClJGM1-RMk6VW61qYPlAhlJkgk';
 const BASE_URL = "https://api.themoviedb.org/3";
 
 const options = {
