@@ -22,6 +22,7 @@ const MovieList = ({ movies }) => {
 					<Link to={`/movies/${movie.id}`} state={location} className={s.link}>
 						<div className={s.image}>
 							<img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.overview} width="500" height="750" loading="lazy" />
+							{/* TODO Поставити зображення-заглушку, якщо йде завантаження або зображення не існує */}
 						</div>
 						<div className={s.content}>
 							<div className={s.raiting}>{Math.round(movie.vote_average * 10)}<sup>%</sup></div>

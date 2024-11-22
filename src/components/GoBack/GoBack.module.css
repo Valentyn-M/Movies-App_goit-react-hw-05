@@ -4,6 +4,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	justify-self: flex-start;
 	gap: 15px;
 	align-self: flex-start;
 	padding: 15px 25px;

@@ -31,7 +31,7 @@ const MoviesPage = () => {
 			try {
 				// Встановлюємо початкові значення перед запитом
 				setIsError(false);
-				setLoading(true);
+				{ searchParams.size && setLoading(true) };
 				// Отримуємо значення параметрів рядка запиту
 				const searchQuery = searchParams.get("query") ?? '';
 				// Виконуємо HTTP-запит (отриману відповідь зберігаємо не в змінній, а одразу деструктуризуємо, отримуючи необхідні властивості об'єкта-відповіді)
