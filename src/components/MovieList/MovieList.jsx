@@ -11,7 +11,7 @@ const MovieList = ({ movies }) => {
 				<li key={movie.id}>
 					{/* Посилання на MovieDetailsPage, передаємо дані  */}
 					{/* Передача даних між компонентами через маршрути <Link> використовують властивість state */}
-					<Link to={`/movies/${movie.id}`} state={{ data: movie, from: location }}>{movie.title}
+					<Link to={`/movies/${movie.id}`} state={location}>{movie.title}
 					</Link>
 				</li>
 			))}

@@ -14,12 +14,13 @@ const HomePage = () => {
 	// Стан для зберігання помилки
 	const [isError, setIsError] = useState(false);
 	// Стан для зберігання поточної сторінки галереї
-	const [page, setPage] = useState(1);
+	const [currentPage, setCurrentPage] = useState(1);
 	// Стан для зберігання загальної кількості сторінок, що повертає бекенд
 	const [totalPages, setTotalPages] = useState(0);
 
 	// Ефект для запитів на бекенд
 	useEffect(() => {
+		document.title = "Popular Movies";
 		// Оголошуємо асинхонну функцію для http-запитів на бекенд
 		const getData = async () => {
 			try {
@@ -27,14 +28,11 @@ const HomePage = () => {
 				setIsError(false);
 				setLoading(true);
 				// Виконуємо HTTP-запит (отриману відповідь одразу деструктуризуємо)
-				const { results, total_pages } = await fetchMoviesTrending(page);
+				const { results, total_pages } = await fetchMoviesTrending(currentPage);
 				// Записуємо дані в стан Trending movies
-				// setMovies(prev => [...prev, ...results]);
-
-				// Перевіряємо на унікальність перед додаванням
-				setMovies((prev) => {
-					const movieIds = prev.map((movie) => movie.id); // Список вже існуючих ID
-					const newMovies = results.filter((movie) => !movieIds.includes(movie.id)); // Додаємо тільки ті, яких немає
+				// Запобігаємо дублюванням, відфільтрувавши фільми, які вже є в стані (це трапляється через StrictMode: У режимі розробки строгий режим React навмисно запускає useEffect двічі. Це означає, що getData викликається двічі, коли компонент вперше монтується.)
+				setMovies(prev => {
+					const newMovies = results.filter(movie => !prev.some(prevMovie => prevMovie.id === movie.id));
 					return [...prev, ...newMovies];
 				});
 
@@ -52,11 +50,11 @@ const HomePage = () => {
 			}
 		}
 		getData();
-	}, [page]);
+	}, [currentPage]);
 
 	// Функція для зміни стану поточної сторінки
 	const changePage = () => {
-		setPage(prev => prev + 1);
+		setCurrentPage(prev => prev + 1);
 	}
 
 	return (
@@ -66,7 +64,7 @@ const HomePage = () => {
 			{loading && <Loader />}
 			{isError && <ErrorMessage />}
 			{/* Показуємо кнопку якщо завантаження завершено i загальна кількість сторінок більше ніж поточна торінка */}
-			{!loading && totalPages > page && <LoadMoreBtn onChangePage={changePage} />}
+			{!loading && totalPages > currentPage && <LoadMoreBtn onChangePage={changePage} />}
 		</>
 	)
 }

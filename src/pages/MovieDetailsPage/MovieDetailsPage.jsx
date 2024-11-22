@@ -1,19 +1,23 @@
 import { Link, Outlet, useLocation, useParams } from "react-router-dom"
 import s from "./MovieDetailsPage.module.css"
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import Loader from "../../components/Loader/Loader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import { fetchMovieByID } from "../../services/api";
+import GoBack from "../../components/GoBack/GoBack";
 
 const MovieDetailsPage = () => {
 
 	// У властивості location.state буде посилання на об'єкт location маршруту з якого відбулася навігація.
 	// Додаємо перевірку на випадок, якщо location.state виявиться undefined. Це може статися, якщо користувач перейшов на сторінку безпосередньо
 	const location = useLocation();
-	const backLinkHref = location.state?.from ?? "/movies"; // Отримуємо шлях, звідки прийшли
+	// Отримуємо шлях, звідки прийшли
+	// const goBackLink = location.state ?? '/movies'; 
+	// Альтернативний (кращий варіант), бо не треба передавати state іншим вкладеним <Link>
+	const goBackLink = useRef(location.state ?? '/movies'); // Якщо користувач перейде по посиланню, то в state буде пусто. Тому прописуємо запасний шлях '/movies'
 
-	// Отримуємо ID фільму з параметра маршруту
-	const { id: movieId } = useParams();
+	// Отримуємо ID фільму з параметра маршруту (з адресної строки: після /movies/)
+	const { movieId } = useParams();
 
 	// Стан для збереження фільму, отриманого від бекенда за його ID
 	const [movie, setMovie] = useState(null);
@@ -33,7 +37,6 @@ const MovieDetailsPage = () => {
 				const data = await fetchMovieByID(movieId);
 				// Записуємо дані в стан для збереження фільму
 				setMovie(data);
-				console.log(data);
 			} catch (error) {
 				// Якщо отримуємо помилку
 				setIsError(true);
@@ -57,7 +60,7 @@ const MovieDetailsPage = () => {
 
 	return (
 		<div>
-			<Link to={backLinkHref}>Go Back</Link>
+			<GoBack to={goBackLink.current} />
 
 			{/* Відображаємо деталі фільму тільки якщо у стані movie є щось */}
 			{movie && (
@@ -91,11 +94,11 @@ const MovieDetailsPage = () => {
 					<h2>Additional Information</h2>
 					<ul>
 						<li>
-							{/* Зберігаємо backLinkHref при переході на вкладені маршрути */}
-							<Link to="cast" state={{ from: backLinkHref }}>Cast</Link>
+							{/* Зберігаємо goBackLink при переході на вкладені маршрути */}
+							<Link to="cast">Cast</Link>
 						</li>
 						<li>
-							<Link to="reviews" state={{ from: backLinkHref }}>Rewiews</Link>
+							<Link to="reviews">Rewiews</Link>
 						</li>
 					</ul>
 					<Suspense fallback={<div>Loading info...</div>}>

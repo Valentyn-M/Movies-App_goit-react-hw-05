@@ -7,10 +7,9 @@ const buildLinkClass = ({ isActive }) => clsx(s.link, { [s.active]: isActive });
 const Navigation = () => {
 	return (
 		<>
-			<p>Logo</p>
-			<nav>
-				<NavLink to="/" className={buildLinkClass}>Home</NavLink>
-				<NavLink to="/movies" className={buildLinkClass}>Movies</NavLink>
+			<nav className={s.nav}>
+				<NavLink to="/" className={buildLinkClass}>Popular Movies</NavLink>
+				<NavLink to="/movies" className={buildLinkClass}>Movie Search</NavLink>
 			</nav>
 		</>
 	)

@@ -7,7 +7,7 @@ import ErrorMessage from "../ErrorMessage/ErrorMessage";
 const MovieCast = () => {
 
 	// Отримуємо ID фільму з параметра маршруту
-	const { id: movieId } = useParams();
+	const { movieId } = useParams();
 
 	// Стан для збереження даних про акторський склад фільму, отриманого від бекенда за його ID
 	const [movieCredits, setMovieCredits] = useState([]);

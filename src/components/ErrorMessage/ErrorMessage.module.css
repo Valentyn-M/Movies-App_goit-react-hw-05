@@ -1,0 +1,13 @@
+.wrap {
+	background-color: #F44336;
+	padding: 15px;
+	border-radius: 10px;
+	color: #fff;
+	text-align: center;
+	line-height: 1.5;
+}
+
+.title {
+	font-size: 18px;
+	font-weight: 500;
+}

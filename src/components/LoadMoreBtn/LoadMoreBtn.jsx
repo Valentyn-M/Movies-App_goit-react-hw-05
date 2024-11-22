@@ -10,7 +10,7 @@ const LoadMoreBtn = ({ onChangePage }) => {
 
 	return (
 		<>
-			<button className={s.btn} type="button" onClick={handleClick}>Load more</button>
+			<button className={s.btn} type="button" onClick={handleClick}>Show More Movies</button>
 		</>
 	)
 }

@@ -7,7 +7,7 @@ import ErrorMessage from "../ErrorMessage/ErrorMessage";
 const MovieReviews = () => {
 
 	// Отримуємо ID фільму з параметра маршруту
-	const { id: movieId } = useParams();
+	const { movieId } = useParams();
 
 	// Стан для збереження даних про відгуки фільму, отриманого від бекенда за його ID
 	const [movieReviews, setMovieReviews] = useState([]);

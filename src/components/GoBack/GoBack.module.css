@@ -1,14 +1,13 @@
-.btn {
+.link {
 	background-color: #05253F;
 	color: #fff;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	align-self: center;
-	padding: 20px 35px;
+	gap: 15px;
+	align-self: flex-start;
+	padding: 15px 25px;
 	border-radius: 100px;
-	font-weight: 500;
-	font-size: 18px;
 	transition: background-color 0.3s ease 0s;
 
 	&:hover,

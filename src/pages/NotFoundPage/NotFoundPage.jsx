@@ -1,11 +1,17 @@
-import { Link } from "react-router-dom"
+import { useEffect } from "react"
+import s from "./NotFoundPage.module.css"
+import GoBack from "../../components/GoBack/GoBack";
 
 const NotFoundPage = () => {
 
+	useEffect(() => {
+		document.title = "Movies | Page is not found";
+	}, []);
+
 	return (
-		<div>
-			<Link to="/">Go to Home</Link>
-			<div>NotFoundPage</div>
+		<div className={s.wrap}>
+			<GoBack to="/" text="Go to Home" />
+			<h1 className={s.title}>Ooops... Page is not found!</h1>
 		</div>
 	)
 }

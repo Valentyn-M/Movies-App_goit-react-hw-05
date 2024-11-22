@@ -3,7 +3,7 @@ import s from "./SearchBar.module.css"
 import { useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
-const SearchBar = ({ onChangeQuery }) => {
+const SearchBar = ({ handleSetQuery }) => {
 
 	const initialValues = {
 		query: "",
@@ -21,7 +21,7 @@ const SearchBar = ({ onChangeQuery }) => {
 			return;
 		}
 
-		onChangeQuery(values.query);
+		handleSetQuery(values.query);
 	}
 
 	// Активацiя форми
@@ -42,7 +42,7 @@ const SearchBar = ({ onChangeQuery }) => {
 						type="text"
 						autoComplete="off"
 						autoFocus
-						placeholder="Search movie"
+						placeholder="Search for a movie"
 						onFocus={handleFocus}
 						onBlur={handleBlur}
 					>
