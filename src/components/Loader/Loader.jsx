@@ -6,7 +6,7 @@ const Loader = () => {
 		<div className={s.loader}>
 			<DotLoader
 				color="#10B3E1"
-				size="100px"
+				size="80px"
 				speedMultiplier="1.2"
 				aria-label="Loading Spinner"
 				data-testid="loader"

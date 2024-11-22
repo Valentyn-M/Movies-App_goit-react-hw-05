@@ -73,7 +73,7 @@ const MovieDetailsPage = () => {
 							<h1>{movie.title}</h1>
 							<div>{movie.tagline}</div>
 							<div>{formatDate(movie.release_date)}</div>
-							<div>{movie.vote_average * 10}%</div>
+							<div>{Math.round(movie.vote_average * 10)}%</div>
 						</li>
 						<li className={s.detailsItem}>
 							<div className={s.categoryName}>Overview</div>
