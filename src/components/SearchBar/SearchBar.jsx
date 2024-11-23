@@ -1,6 +1,7 @@
 import { Field, Form, Formik } from "formik"
 import s from "./SearchBar.module.css"
 import toast, { Toaster } from "react-hot-toast";
+import { CgSearch } from "react-icons/cg";
 
 const SearchBar = ({ handleSetQuery }) => {
 
@@ -12,7 +13,7 @@ const SearchBar = ({ handleSetQuery }) => {
 		// Якщо текстове поле порожнє
 		if (values.query === "") {
 			// Бібліотека React Hot Toast
-			toast.error("You must enter text to search for images")
+			toast.error("You must enter text to search for movie")
 			return;
 		}
 		handleSetQuery(values.query);
@@ -30,7 +31,7 @@ const SearchBar = ({ handleSetQuery }) => {
 						placeholder="Search for a movie"
 					>
 					</Field>
-					<button className={s.btn} type="submit" aria-label="Search">Search</button>
+					<button className={s.btn} type="submit"><CgSearch className={s.icon} />Search</button>
 				</Form>
 			</Formik>
 			<Toaster position="top-right" />

@@ -6,6 +6,7 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import LoadMoreBtn from "../../components/LoadMoreBtn/LoadMoreBtn";
 import MovieList from "../../components/MovieList/MovieList";
 import { useSearchParams } from "react-router-dom";
+import LoaderSearch from "../../components/LoaderSearch/LoaderSearch";
 
 const MoviesPage = () => {
 
@@ -79,7 +80,10 @@ const MoviesPage = () => {
 			<SearchBar handleSetQuery={handleSetQuery} />
 			{/* Відображаємо список фільмів тільки якщо у стані movies є хоча б один елемент */}
 			{movies.length > 0 && <MovieList movies={movies} />}
-			{loading && <Loader />}
+			{loading && (
+				currentPage > 1 ? <Loader /> : <LoaderSearch />
+			)}
+
 			{isError && <ErrorMessage />}
 			{/* Показуємо кнопку якщо завантаження завершено i загальна кількість сторінок більше ніж поточна торінка */}
 			{!loading && totalPages > currentPage && <LoadMoreBtn onChangePage={changePage} />}

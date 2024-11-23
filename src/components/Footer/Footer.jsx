@@ -1,9 +1,10 @@
+import { SiThemoviedatabase } from "react-icons/si"
 import s from "./Footer.module.css"
 
 const Footer = () => {
 	return (
 		<div className={s.wrap}>
-			Movies | Built with React | 2024
+			<SiThemoviedatabase className={s.icon} />Movies | Built with React | 2024
 		</div>
 	)
 }

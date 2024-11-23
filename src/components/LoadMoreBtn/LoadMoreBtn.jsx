@@ -1,3 +1,4 @@
+import { MdDownloading } from "react-icons/md";
 import s from "./LoadMoreBtn.module.css"
 
 const LoadMoreBtn = ({ onChangePage }) => {
@@ -10,7 +11,7 @@ const LoadMoreBtn = ({ onChangePage }) => {
 
 	return (
 		<>
-			<button className={s.btn} type="button" onClick={handleClick}>Show More Movies</button>
+			<button className={s.btn} type="button" onClick={handleClick}>Show More Movies<MdDownloading /></button>
 		</>
 	)
 }
