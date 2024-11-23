@@ -5,6 +5,7 @@ import Loader from "../../components/Loader/Loader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import { fetchMovieByID } from "../../services/api";
 import GoBack from "../../components/GoBack/GoBack";
+import noImg from '../../img/no-img.jpg';
 
 const MovieDetailsPage = () => {
 
@@ -66,7 +67,7 @@ const MovieDetailsPage = () => {
 			{movie && (
 				<div className={s.wrap}>
 					<div className={s.image}>
-						<img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.overview} width="500" height="750" loading="lazy" />
+						<img src={movie.poster_path ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}` : noImg} alt={movie.overview || "No description available"} width="500" height="750" loading="lazy" />
 					</div>
 					<ul className={s.details}>
 						<li className={s.detailsItem}>

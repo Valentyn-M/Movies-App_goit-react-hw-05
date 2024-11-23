@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom"
 import s from "./MovieList.module.css"
+import noImg from '../../img/no-img.jpg';
 
 const MovieList = ({ movies }) => {
 
@@ -9,9 +10,15 @@ const MovieList = ({ movies }) => {
 	// Функція для дати
 	function formatDate(dateString) {
 		const date = new Date(dateString);
+		const monthNames = [
+			"January", "February", "March", "April", "May", "June",
+			"July", "August", "September", "October", "November", "December"
+		];
+		const month = monthNames[date.getUTCMonth()]
 		const year = date.getUTCFullYear();
-		return `${year}`;
+		return `${year}, ${month}`;
 	}
+
 
 	return (
 		<ul className={s.list}>
@@ -21,13 +28,12 @@ const MovieList = ({ movies }) => {
 					{/* Передача даних між компонентами через маршрути <Link> використовують властивість state */}
 					<Link to={`/movies/${movie.id}`} state={location} className={s.link}>
 						<div className={s.image}>
-							<img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.overview} width="500" height="750" loading="lazy" />
-							{/* TODO Поставити зображення-заглушку, якщо йде завантаження або зображення не існує */}
+							<img src={movie.poster_path ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}` : noImg} alt={movie.overview || "No description available"} width="500" height="750" loading="lazy" />
 						</div>
 						<div className={s.content}>
-							<div className={s.raiting}>{Math.round(movie.vote_average * 10)}<sup>%</sup></div>
+							<div className={s.raiting}><div className={s.raitingWrap}>{Math.round(movie.vote_average * 10)}<sup>%</sup></div></div>
 							<div className={s.title}>{movie.title}</div>
-							<div>{formatDate(movie.release_date)}</div>
+							<div className={s.date}>{formatDate(movie.release_date)}</div>
 						</div>
 					</Link>
 				</li>
