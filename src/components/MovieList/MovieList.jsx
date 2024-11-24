@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom"
 import s from "./MovieList.module.css"
-import noImg from '../../img/no-img.jpg';
+import noImg from '../../img/no-img.png';
 
 const MovieList = ({ movies }) => {
 
@@ -27,8 +27,8 @@ const MovieList = ({ movies }) => {
 					{/* Посилання на MovieDetailsPage, передаємо дані  */}
 					{/* Передача даних між компонентами через маршрути <Link> використовують властивість state */}
 					<Link to={`/movies/${movie.id}`} state={location} className={s.link}>
-						<div className={s.image}>
-							<img src={movie.poster_path ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}` : noImg} alt={movie.overview || "No description available"} width="500" height="750" loading="lazy" />
+						<div className={s.imageWrap}>
+							<img className={s.image} src={movie.poster_path ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}` : noImg} alt={movie.overview || "No description available"} width="500" height="750" loading="lazy" />
 						</div>
 						<div className={s.content}>
 							<div className={s.raiting}><div className={s.raitingWrap}>{Math.round(movie.vote_average * 10)}<sup>%</sup></div></div>

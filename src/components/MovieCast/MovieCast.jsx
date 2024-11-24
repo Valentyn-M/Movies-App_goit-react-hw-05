@@ -4,7 +4,7 @@ import { fetchMovieCredits } from "../../services/api";
 import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import s from "./MovieCast.module.css"
-import noImg from '../../img/no-img_185.jpg';
+import noImg from '../../img/no-img_185.png';
 
 const MovieCast = () => {
 
@@ -66,7 +66,7 @@ const MovieCast = () => {
 				// Якщо немає інформації про акторський склад, то рендерний блок
 				isNoData && (
 					<div className={s.noData}>
-						<p className={s.noDataContent}>We don&apos;t have any reviews for this movie.</p>
+						<p className={s.noDataContent}>There is no information about the cast of this film.</p>
 					</div>
 				)
 			)}

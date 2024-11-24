@@ -3,6 +3,8 @@ import { Route, Routes } from 'react-router-dom';
 import Navigation from './Navigation/Navigation';
 import Footer from './Footer/Footer';
 import { lazy, Suspense } from 'react';
+import GoUp from './GoUp/GoUp';
+import { useMediaQuery } from 'react-responsive';
 
 const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
 const MoviesPage = lazy(() => import("../pages/MoviesPage/MoviesPage"));
@@ -13,7 +15,7 @@ const NotFoundPage = lazy(() => import("../pages/NotFoundPage/NotFoundPage"));
 
 function App() {
 
-	// TODO Зробити кнопку "Нагору"
+	const isBigScreen = useMediaQuery({ query: '(min-width: 481px)' });
 
 	return (
 		<>
@@ -38,6 +40,8 @@ function App() {
 			<footer>
 				<Footer />
 			</footer>
+
+			{isBigScreen && <GoUp />}
 		</>
 	)
 }

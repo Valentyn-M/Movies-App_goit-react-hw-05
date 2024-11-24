@@ -1,0 +1,41 @@
+.goUp {
+	width: 64px;
+	height: 64px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	background-color: #05253F;
+	box-shadow: 0 0 7px rgba(255, 255, 255, .7);
+	color: #fff;
+	position: fixed;
+	bottom: 25px;
+	right: 25px;
+	z-index: 999;
+	transition: all 0.3s ease;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	-webkit-tap-highlight-color: transparent;
+	outline: none;
+
+	&:hover,
+	&:focus {
+		background-color: #10B3E1;
+	}
+
+	&.isActive {
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+	}
+
+
+	@media only screen and (min-width: 1530px) {
+		left: calc(50% + (1400px / 2));
+	}
+}
+
+.icon {
+	font-size: 35px;
+}

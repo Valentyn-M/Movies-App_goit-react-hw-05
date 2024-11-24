@@ -5,7 +5,7 @@ import Loader from "../../components/Loader/Loader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import { fetchMovieByID } from "../../services/api";
 import GoBack from "../../components/GoBack/GoBack";
-import noImg from '../../img/no-img.jpg';
+import noImg from '../../img/no-img.png';
 import { useMediaQuery } from "react-responsive";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { MdRateReview } from "react-icons/md";
