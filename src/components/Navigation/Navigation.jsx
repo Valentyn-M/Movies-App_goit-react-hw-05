@@ -10,8 +10,9 @@ const Navigation = () => {
 	return (
 		<>
 			<nav className={s.nav}>
-				<NavLink to="/" className={buildLinkClass}><BiSolidMoviePlay />Popular Movies</NavLink>
-				<NavLink to="/movies" className={buildLinkClass}><CgSearch className={s.icon} />Movie Search</NavLink>
+				{/* Атрибут end каже react-router-dom, що активний клас повинен застосовуватись тільки для точного збігу маршруту. Без end маршрут /movies вважається активним навіть за переходу на дочірній маршрут, наприклад, /movies/414906 */}
+				<NavLink to="/" end className={buildLinkClass}><BiSolidMoviePlay />Popular Movies</NavLink>
+				<NavLink to="/movies" end className={buildLinkClass}><CgSearch className={s.icon} />Movie Search</NavLink>
 			</nav>
 		</>
 	)

@@ -6,6 +6,7 @@
 	align-items: center;
 	justify-content: center;
 	padding: 12px;
+	gap: 12px;
 }
 
 .link {
@@ -20,6 +21,12 @@
 	height: 100%;
 	border-radius: 100px;
 	text-align: center;
+	transition: background-color 0.3s ease 0s;
+
+	&:hover,
+	&:focus {
+		background-color: #10B3E1;
+	}
 
 	@media (max-width: 480px) {
 		font-size: 18px;

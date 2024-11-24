@@ -6,8 +6,11 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import { fetchMovieByID } from "../../services/api";
 import GoBack from "../../components/GoBack/GoBack";
 import noImg from '../../img/no-img.jpg';
+import { useMediaQuery } from "react-responsive";
 
 const MovieDetailsPage = () => {
+
+	const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
 	// У властивості location.state буде посилання на об'єкт location маршруту з якого відбулася навігація.
 	// Додаємо перевірку на випадок, якщо location.state виявиться undefined. Це може статися, якщо користувач перейшов на сторінку безпосередньо
@@ -29,6 +32,9 @@ const MovieDetailsPage = () => {
 
 	// Отримання фільму від бекенду
 	useEffect(() => {
+
+		document.title = "Movie Details";
+
 		const getMovie = async () => {
 			try {
 				// Встановлюємо початкові значення перед запитом
@@ -51,43 +57,186 @@ const MovieDetailsPage = () => {
 	}, [movieId]);
 
 	// Функція для дати
-	function formatDate(dateString) {
+	function formatDate(dateString, fullDate = true) {
 		const date = new Date(dateString);
+		if (isNaN(date)) {
+			throw new Error("Invalid date string provided");
+		}
 		const day = String(date.getUTCDate()).padStart(2, '0');
 		const month = String(date.getUTCMonth() + 1).padStart(2, '0');
 		const year = date.getUTCFullYear();
-		return `${day}.${month}.${year}`;
+		if (fullDate) {
+			return `${day}.${month}.${year}`;
+		} else {
+			return `${year}`;
+		}
+	}
+
+	// Функція часу
+	function formatTime(duration) {
+		const hours = Math.floor(duration / 60);
+		const minutes = duration % 60;
+		if (hours > 0 && minutes > 0) {
+			return `${hours}h ${minutes}m`;
+		} else if (hours > 0) {
+			return `${hours}h`;
+		} else {
+			return `${minutes}m`;
+		}
 	}
 
 	return (
-		<div>
+		<>
 			<GoBack to={goBackLink.current} />
 
-			{/* Відображаємо деталі фільму тільки якщо у стані movie є щось */}
-			{movie && (
-				<div className={s.wrap}>
-					<div className={s.image}>
-						<img src={movie.poster_path ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}` : noImg} alt={movie.overview || "No description available"} width="500" height="750" loading="lazy" />
+			{/* До 768px */}
+			{isMobile ? (
+				/* Відображаємо Додаткову інфу про фільм тільки якщо у стані movie є щось */
+				movie && (
+					<div className={s.wrapMovie}>
+						<div className={s.posterWrapper}>
+							<div className={s.poster}>
+								<div
+									className={s.imageContent}
+									style={{
+										backgroundImage: `url(https://image.tmdb.org/t/p/w780/${movie.backdrop_path})`,
+									}}
+								>
+									<div className={s.backgroundGradient}></div>
+									<div className={s.image}>
+										<img
+											src={
+												movie.poster_path
+													? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+													: noImg
+											}
+											alt={movie.overview || 'No description available'}
+											width="500"
+											height="750"
+											loading="lazy"
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<ul className={s.details}>
+							<li className={s.detailsItem}>
+								<h1 className={s.title}>
+									{movie.title}{' '}
+									<span className={s.titleYear}>
+										({formatDate(movie.release_date, false)})
+									</span>
+								</h1>
+								<div className={s.infoWrap}>
+									<div className={s.info}>
+										<div className={s.date}>
+											<span>{formatDate(movie.release_date)}</span>{' '}
+											<span>({movie.origin_country})</span>
+										</div>
+										<div className={s.duration}>{formatTime(movie.runtime)}</div>
+									</div>
+									<div className={s.scoreWrap}>
+										<div className={s.score}>
+											<div className={s.scoreContainer}>
+												{Math.round(movie.vote_average * 10)}
+												<sup>%</sup>
+											</div>
+										</div>
+										<div className={s.scoreTitle}>
+											User
+											<br /> Score
+										</div>
+									</div>
+								</div>
+							</li>
+							<li className={s.detailsItem}>
+								<div className={s.genres}>
+									{movie.genres.map((genre) => genre.name).join(', ')}
+								</div>
+								<div className={s.tagline}>{movie.tagline}</div>
+							</li>
+							<li className={s.detailsItem}>
+								<div className={s.categoryName}>Overview</div>
+								<div>{movie.overview}</div>
+							</li>
+						</ul>
 					</div>
-					<ul className={s.details}>
-						<li className={s.detailsItem}>
-							<h1>{movie.title}</h1>
-							<div>{movie.tagline}</div>
-							<div>{formatDate(movie.release_date)}</div>
-							<div>{Math.round(movie.vote_average * 10)}%</div>
-						</li>
-						<li className={s.detailsItem}>
-							<div className={s.categoryName}>Overview</div>
-							<div>{movie.overview}</div>
-						</li>
-						<li className={s.detailsItem}>
-							<div className={s.categoryName}>Genre</div>
-							{/* Перетворюємо масив об'єктів genres на масив рядків з назвами жанрів перед використанням .join(", ") */}
-							<div>{movie.genres.map(genre => genre.name).join(", ") || "No genres available"}</div>
-						</li>
-					</ul>
-				</div>
+				)
+			) : (
+				/* Понад 768px */
+				movie && (
+					<div className={s.movieHeader}
+						style={{
+							backgroundImage: `url(https://image.tmdb.org/t/p/w1280/${movie.backdrop_path})`,
+						}}
+					>
+						<div className={s.movieBg}>
+							<div className={s.movieWrap}>
+								<div className={s.movieInner}>
+									<div className={s.poster}>
+										<div className={s.image}>
+											<img
+												src={
+													movie.poster_path
+														? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+														: noImg
+												}
+												alt={movie.overview || 'No description available'}
+												width="500"
+												height="750"
+												loading="lazy"
+											/>
+										</div>
+									</div>
+									<ul className={s.details}>
+										<li className={s.detailsItem}>
+											<h1 className={s.title}>
+												{movie.title}{' '}
+												<span className={s.titleYear}>
+													({formatDate(movie.release_date, false)})
+												</span>
+											</h1>
+											<div className={s.infoWrap}>
+												<div className={s.info}>
+													<div className={s.date}>
+														<span>{formatDate(movie.release_date)}</span>{' '}
+														<span>({movie.origin_country})</span>
+													</div>
+													<div className={s.duration}>{formatTime(movie.runtime)}</div>
+												</div>
+												<div className={s.scoreWrap}>
+													<div className={s.score}>
+														<div className={s.scoreContainer}>
+															{Math.round(movie.vote_average * 10)}
+															<sup>%</sup>
+														</div>
+													</div>
+													<div className={s.scoreTitle}>
+														User
+														<br /> Score
+													</div>
+												</div>
+											</div>
+										</li>
+										<li className={s.detailsItem}>
+											<div className={s.genres}>
+												{movie.genres.map((genre) => genre.name).join(', ')}
+											</div>
+											<div className={s.tagline}>{movie.tagline}</div>
+										</li>
+										<li className={s.detailsItem}>
+											<div className={s.categoryName}>Overview</div>
+											<div>{movie.overview}</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				)
 			)}
+
+
 
 			{/* Відображаємо Додаткову інфу про фільм тільки якщо у стані movie є щось */}
 			{movie && (
@@ -112,7 +261,7 @@ const MovieDetailsPage = () => {
 			{loading && <Loader />}
 			{isError && <ErrorMessage />}
 
-		</div>
+		</>
 	)
 }
 
