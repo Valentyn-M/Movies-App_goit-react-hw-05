@@ -13,6 +13,8 @@ const NotFoundPage = lazy(() => import("../pages/NotFoundPage/NotFoundPage"));
 
 function App() {
 
+	// TODO Зробити кнопку "Нагору"
+
 	return (
 		<>
 			<header>

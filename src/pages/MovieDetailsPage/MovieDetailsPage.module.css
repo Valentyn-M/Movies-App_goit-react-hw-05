@@ -80,6 +80,8 @@
 
 /* ========================================================================================================================== */
 
+/* #region details */
+
 .details {
 	padding: 25px 20px;
 	display: flex;
@@ -180,4 +182,31 @@
 .categoryName {
 	font-weight: 500;
 	font-size: 20px;
+}
+
+/* #endregion */
+
+
+.listMoreInfo {
+	display: flex;
+	gap: 12px;
+}
+
+.linkMoreInfo {
+	background-color: #05253F;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	justify-self: flex-start;
+	gap: 15px;
+	align-self: flex-start;
+	padding: 15px 25px;
+	border-radius: 100px;
+	transition: background-color 0.3s ease 0s;
+
+	&:hover,
+	&:focus {
+		background-color: #10B3E1;
+	}
 }

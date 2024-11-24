@@ -7,6 +7,8 @@ import { fetchMovieByID } from "../../services/api";
 import GoBack from "../../components/GoBack/GoBack";
 import noImg from '../../img/no-img.jpg';
 import { useMediaQuery } from "react-responsive";
+import { FaPeopleGroup } from "react-icons/fa6";
+import { MdRateReview } from "react-icons/md";
 
 const MovieDetailsPage = () => {
 
@@ -236,23 +238,19 @@ const MovieDetailsPage = () => {
 				)
 			)}
 
-
-
 			{/* Відображаємо Додаткову інфу про фільм тільки якщо у стані movie є щось */}
 			{movie && (
 				<div>
-					<h2>Additional Information</h2>
-					<ul>
+					<ul className={s.listMoreInfo}>
 						<li>
 							{/* Зберігаємо goBackLink при переході на вкладені маршрути */}
-							<Link to="cast">Cast</Link>
+							<Link to="cast" className={s.linkMoreInfo}><FaPeopleGroup /> Cast</Link>
 						</li>
 						<li>
-							<Link to="reviews">Rewiews</Link>
+							<Link to="reviews" className={s.linkMoreInfo}><MdRateReview /> Rewiews</Link>
 						</li>
 					</ul>
-					<Suspense fallback={<div>Loading info...</div>}>
-						{/* TODO Вставити лоадер */}
+					<Suspense fallback={<div><Loader /></div>}>
 						<Outlet />
 					</Suspense>
 				</div>
