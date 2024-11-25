@@ -13,7 +13,7 @@ const SearchBar = ({ handleSetQuery }) => {
 		// Якщо текстове поле порожнє
 		if (values.query === "") {
 			// Бібліотека React Hot Toast
-			toast.error("You must enter text to search for movie")
+			toast.error("You must enter text to search for a movie")
 			return;
 		}
 		handleSetQuery(values.query);
