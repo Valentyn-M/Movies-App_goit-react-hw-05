@@ -30,3 +30,16 @@
 	font-weight: 500;
 	font-size: 18px;
 }
+
+.noData {
+	background-color: #fff;
+	padding: 25px;
+	border-radius: 25px;
+	border: 2px solid #05253F;
+}
+
+.noDataContent {
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 1.3;
+}
