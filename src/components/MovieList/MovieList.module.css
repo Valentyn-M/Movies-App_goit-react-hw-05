@@ -84,6 +84,8 @@
 	.raitingWrap {
 		display: flex;
 		align-items: flex-start;
+		position: relative;
+		left: 1px;
 	}
 
 	sup {

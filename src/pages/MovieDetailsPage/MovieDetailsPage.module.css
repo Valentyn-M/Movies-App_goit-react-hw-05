@@ -163,6 +163,9 @@
 	.scoreContainer {
 		display: flex;
 		align-items: flex-start;
+		line-height: 1;
+		position: relative;
+		left: 2px;
 	}
 
 	sup {
