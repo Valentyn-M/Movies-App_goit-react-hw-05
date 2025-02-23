@@ -69,8 +69,5 @@ npm run build
 vercel deploy
 ```
 
-## Contributing
-Contributions are welcome! Feel free to fork this repository and submit a pull request with improvements or bug fixes.
-
 ## License
 This project is licensed under the MIT License.
