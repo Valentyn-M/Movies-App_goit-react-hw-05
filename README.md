@@ -1,3 +1,5 @@
+![Preview](./preview.jpeg)
+
 # Movies App
 
 A responsive movie search application developed using the Mobile-First approach. This project is built with React and utilizes React Router for navigation. It allows users to search for movies, view detailed information, and explore trending films using the TMDB API.
